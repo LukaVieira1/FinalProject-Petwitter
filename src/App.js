@@ -9,9 +9,9 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route element={<Layout />}>
           <Route path="/" element={<PublicPage />} />
-          <Route path="/login" element={<Login />} />
           <Route
             path="/protected"
             element={
