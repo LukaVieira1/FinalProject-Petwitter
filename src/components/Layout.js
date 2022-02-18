@@ -1,5 +1,4 @@
 import { Link, Outlet } from "react-router-dom";
-
 import AuthStatus from "./AuthStatus";
 
 function Layout() {
