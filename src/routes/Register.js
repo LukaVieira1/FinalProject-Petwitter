@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/auth-context";
 import {
   Flex,
   Text,
@@ -21,18 +20,18 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signin } = useAuth();
 
   const from = location.state?.from?.pathname || "/";
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    //todo: send form data to back end
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
+    const name = formData.get("name");
+    const username = formData.get("username");
 
-    await signin({ email, password });
     navigate(from, { replace: true });
   }
   const [show, setShow] = useState(false);
@@ -42,35 +41,18 @@ function Login() {
     <>
       <Flex direction={["column", "row"]}>
         <Flex
-          width={["flex", "60%"]}
-          height={["flex", "100vh"]}
           backgroundSize={"cover"}
           backgroundRepeat={"no-repeat"}
-          backgroundImage="url('images/loginBG.png')"
+          backgroundImage="url('images/registerBG.png')"
           direction={["column"]}
           p={["45px 0 25px 30px"]}
         >
           <Image
-            display={["none", "flex"]}
-            src="images/whiteLogo.png"
-            alt="stepSymbol"
-          />
-          <Image
-            display={["flex", "none"]}
             width={["52px"]}
             height={["52px"]}
             src="images/stepSymbol.png"
             alt="stepSymbol"
           />
-          <Text
-            display={["flex", "none"]}
-            mt={["40px"]}
-            fontSize="36px"
-            color={["#FFFFFF"]}
-            lineHeight={["49px"]}
-          >
-            Comece agora. Conecte-se já.
-          </Text>
         </Flex>
         <Flex
           p={["30px 32px 24px 32px"]}
@@ -78,25 +60,26 @@ function Login() {
           alignItems={"center"}
         >
           <Text
-            display={["none", "flex"]}
-            mt={["40px"]}
-            fontSize="36px"
-            color={["#FFFFFF"]}
-            lineHeight={["49px"]}
-          >
-            Comece agora. Conecte-se já.
-          </Text>
-          <Text
             color={["#212121"]}
             fontSize={["24px"]}
             lineHeight={["40px"]}
             fontWeight={["600px"]}
             alignSelf={["flex-start"]}
           >
-            Login
+            Cadastro
           </Text>
           <FormControl mt={["32px"]}>
-            <FormLabel htmlFor="email">Email</FormLabel>
+            <FormLabel htmlFor="email">Nome</FormLabel>
+            <Input
+              width={["100%"]}
+              height={["40px"]}
+              id="text"
+              type="text"
+              placeholder="Nome"
+            />
+            <FormLabel mt="16px" htmlFor="email">
+              Email
+            </FormLabel>
             <Input
               width={["100%"]}
               height={["40px"]}
@@ -104,20 +87,19 @@ function Login() {
               type="email"
               placeholder="Email"
             />
-            <Flex justify={["space-between"]}>
-              <FormLabel mt="32px" htmlFor="senha">
-                Senha
-              </FormLabel>
-              <Link
-                textDecoration={["underline"]}
-                mt="32px"
-                color="cyan.400"
-                as={ReachLink}
-                to="/recovery-password"
-              >
-                Esqueci minha senha
-              </Link>
-            </Flex>
+            <FormLabel mt="16px" htmlFor="email">
+              Nome de usuário
+            </FormLabel>
+            <Input
+              width={["100%"]}
+              height={["40px"]}
+              id="username"
+              type="text"
+              placeholder="EX.: billbuldog"
+            />
+            <FormLabel mt="16px" htmlFor="senha">
+              Senha
+            </FormLabel>
             <InputGroup>
               <Input
                 width={["100%"]}
@@ -140,6 +122,9 @@ function Login() {
                 </Button>
               </InputRightElement>
             </InputGroup>
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              Deve conter no mínimo um número e uma letra maiúscula{" "}
+            </Text>
             <ReachLink to="/feed">
               <Button
                 variant="solid"
@@ -148,24 +133,24 @@ function Login() {
                 height={["40px"]}
                 type="submit"
               >
-                Entrar
+                Registrar
               </Button>
             </ReachLink>
           </FormControl>
           <Text mt={["24px"]} alignSelf={["flex-start"]}>
-            Ainda não possui uma conta?
+            Ja possui cadastro?
           </Text>
           <Link
             textDecoration={["underline"]}
             color="cyan.400"
             alignSelf={["flex-start"]}
             as={ReachLink}
-            to="/register"
+            to="/login"
           >
-            Cadastre-se
+            Faça login
           </Link>
           <Image
-            mt={["62px"]}
+            mt={["27px"]}
             width={["180px"]}
             src={["images/cyanLogo.png"]}
             alt="petwitterLogo"
