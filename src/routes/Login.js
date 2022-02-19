@@ -48,18 +48,18 @@ function Login() {
           backgroundRepeat={"no-repeat"}
           backgroundImage="url('images/loginBG.png')"
           direction={["column"]}
-          p={["45px 0 25px 30px"]}
+          p={["45px 0 25px 30px", "309px 187px 308px 162px"]}
         >
           <Image
             display={["none", "flex"]}
             src="images/whiteLogo.png"
-            alt="stepSymbol"
+            alt="logo"
           />
           <Image
             display={["flex", "none"]}
             width={["52px"]}
             height={["52px"]}
-            src="images/stepSymbol.png"
+            src="images/whiteStepSymbol.png"
             alt="stepSymbol"
           />
           <Text
@@ -73,18 +73,31 @@ function Login() {
           </Text>
         </Flex>
         <Flex
-          p={["30px 32px 24px 32px"]}
+          p={["30px 32px 24px 32px", "63px 72px 80px 72px"]}
           direction={["column"]}
           alignItems={"center"}
+          width={["100%", "40%"]}
         >
+          <Image
+            alignSelf={"flex-start"}
+            display={["none", "flex"]}
+            width={["76px"]}
+            height={["76px"]}
+            src="images/cyanStepSymbol.png"
+            alt="stepSymbol"
+          />
           <Text
             display={["none", "flex"]}
-            mt={["40px"]}
+            mt={"26px"}
+            mb={"32px"}
             fontSize="36px"
-            color={["#FFFFFF"]}
+            fontWeight={"700"}
+            color={["cyan.400"]}
             lineHeight={["49px"]}
+            alignSelf={"flex-start"}
           >
-            Comece agora. Conecte-se já.
+            Comece agora. <br />
+            Conecte-se já.
           </Text>
           <Text
             color={["#212121"]}
@@ -127,7 +140,7 @@ function Login() {
                 placeholder="Senha"
               />
               <InputRightElement width="4.5rem">
-                {/* TODO: FIX THE ICON (OUTLINE BORDER) */}
+                {/* TODO: FIX THE ICON ( OUTLINE BORDER) */}
                 <Button
                   variant={"unstyled"}
                   outline={"none"}
@@ -152,19 +165,21 @@ function Login() {
               </Button>
             </ReachLink>
           </FormControl>
-          <Text mt={["24px"]} alignSelf={["flex-start"]}>
-            Ainda não possui uma conta?
-          </Text>
-          <Link
-            textDecoration={["underline"]}
-            color="cyan.400"
-            alignSelf={["flex-start"]}
-            as={ReachLink}
-            to="/register"
-          >
-            Cadastre-se
-          </Link>
+          <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
+            <Text mt={["24px"]}>Ainda não possui uma conta?</Text>
+            <Link
+              mt={["0", "24px"]}
+              ml={["0", "5px"]}
+              textDecoration={["underline"]}
+              color="cyan.400"
+              as={ReachLink}
+              to="/register"
+            >
+              Cadastre-se
+            </Link>
+          </Flex>
           <Image
+            display={["flex", "none"]}
             mt={["62px"]}
             width={["180px"]}
             src={["images/cyanLogo.png"]}

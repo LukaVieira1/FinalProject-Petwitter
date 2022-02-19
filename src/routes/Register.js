@@ -50,7 +50,7 @@ function Login() {
           <Image
             width={["52px"]}
             height={["52px"]}
-            src="images/stepSymbol.png"
+            src="images/WhitestepSymbol.png"
             alt="stepSymbol"
           />
         </Flex>
