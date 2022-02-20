@@ -41,13 +41,24 @@ function Login() {
     <>
       <Flex direction={["column", "row"]}>
         <Flex
+          width={["flex", "50%"]}
+          height={["flex", "100vh"]}
           backgroundSize={"cover"}
           backgroundRepeat={"no-repeat"}
-          backgroundImage="url('images/registerBG.png')"
+          backgroundImage={[
+            "url('images/registerBG.png')",
+            "url('images/fullRegisterBG.png')",
+          ]}
           direction={["column"]}
-          p={["45px 0 25px 30px"]}
+          p={["45px 0 25px 30px", "309px 187px 308px 162px"]}
         >
           <Image
+            display={["none", "flex"]}
+            src="images/whiteLogo.png"
+            alt="logo"
+          />
+          <Image
+            display={["flex", "none"]}
             width={["52px"]}
             height={["52px"]}
             src="images/WhitestepSymbol.png"
@@ -55,10 +66,20 @@ function Login() {
           />
         </Flex>
         <Flex
-          p={["30px 32px 24px 32px"]}
+          width={["100%", "50%"]}
+          p={["30px 32px 24px 32px", "60px 64px 50px 74px"]}
           direction={["column"]}
           alignItems={"center"}
         >
+          <Image
+            alignSelf={"flex-start"}
+            display={["none", "flex"]}
+            width={["76px"]}
+            height={["76px"]}
+            src="images/cyanStepSymbol.png"
+            alt="stepSymbol"
+            mb={["46px"]}
+          />
           <Text
             color={["#212121"]}
             fontSize={["24px"]}
@@ -125,22 +146,43 @@ function Login() {
             <Text fontSize={["10px"]} mt={["4px"]}>
               Deve conter no mínimo um número e uma letra maiúscula{" "}
             </Text>
-            <ReachLink to="/feed">
-              <Button
-                variant="solid"
-                mt="40px"
-                width={["100%"]}
-                height={["40px"]}
-                type="submit"
-              >
-                Registrar
-              </Button>
-            </ReachLink>
+            {/* TODO: Waiting figma instructions for this route */}
+            <Flex justify={("flex-start", "flex-end")} wrap={"wrap"}>
+              <ReachLink to="/???">
+                <Button
+                  mr={"50px"}
+                  display={["none", "flex"]}
+                  variant="outline"
+                  mt="40px"
+                  width={["100%", "158px"]}
+                  height={["40px"]}
+                  type="submit"
+                >
+                  Cancelar
+                </Button>
+              </ReachLink>
+              <ReachLink to="/login">
+                <Button
+                  variant="solid"
+                  mt="40px"
+                  width={["100%", "158px"]}
+                  height={["40px"]}
+                  type="submit"
+                >
+                  Registrar
+                </Button>
+              </ReachLink>
+            </Flex>
           </FormControl>
-          <Text mt={["24px"]} alignSelf={["flex-start"]}>
+          <Text
+            display={["flex", "none"]}
+            mt={["24px"]}
+            alignSelf={["flex-start"]}
+          >
             Ja possui cadastro?
           </Text>
           <Link
+            display={["flex", "none"]}
             textDecoration={["underline"]}
             color="cyan.400"
             alignSelf={["flex-start"]}
@@ -149,12 +191,6 @@ function Login() {
           >
             Faça login
           </Link>
-          <Image
-            mt={["27px"]}
-            width={["180px"]}
-            src={["images/cyanLogo.png"]}
-            alt="petwitterLogo"
-          />
         </Flex>
       </Flex>
     </>
