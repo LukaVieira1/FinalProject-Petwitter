@@ -2,9 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import { AuthProvider, RequireAuth } from "./context/auth-context";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
-import Layout from "./components/Layout";
-import PublicPage from "./routes/PublicPage";
-import ProtectedPage from "./routes/ProtectedPage";
+import Navbar from "./components/Navbar";
+import Home from "./routes/Home";
 
 function App() {
   return (
@@ -12,16 +11,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route element={<Layout />}>
-          <Route path="/" element={<PublicPage />} />
-          <Route
-            path="/protected"
-            element={
-              <RequireAuth>
-                <ProtectedPage />
-              </RequireAuth>
-            }
-          />
+        <Route element={<Navbar />}>
+          <Route path="/home" element={<Home />} />
         </Route>
       </Routes>
     </AuthProvider>

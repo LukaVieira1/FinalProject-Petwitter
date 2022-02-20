@@ -153,7 +153,7 @@ function Login() {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <ReachLink to="/feed">
+            <ReachLink to="/home">
               <Button
                 variant="solid"
                 mt="40px"

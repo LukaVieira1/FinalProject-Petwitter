@@ -42,6 +42,11 @@ const theme = extendTheme({
           backgroundColor: "cyan.400",
           color: "white",
         },
+        outline: {
+          backgroundColor: "white",
+          color: "cyan.400",
+          borderColor: "cyan.400",
+        },
       },
     },
   },

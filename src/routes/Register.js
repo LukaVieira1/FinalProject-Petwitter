@@ -146,11 +146,10 @@ function Login() {
             <Text fontSize={["10px"]} mt={["4px"]}>
               Deve conter no mínimo um número e uma letra maiúscula{" "}
             </Text>
-            {/* TODO: Waiting figma instructions for this route */}
-            <Flex justify={("flex-start", "flex-end")} wrap={"wrap"}>
+            {/* TODO: Waiting figma instructions for this route and fix the button in mobile screen */}
+            <Flex justify={("center", "flex-end")} wrap={"wrap"}>
               <ReachLink to="/???">
                 <Button
-                  mr={"50px"}
                   display={["none", "flex"]}
                   variant="outline"
                   mt="40px"
@@ -163,6 +162,7 @@ function Login() {
               </ReachLink>
               <ReachLink to="/login">
                 <Button
+                  ml={["0", "50px"]}
                   variant="solid"
                   mt="40px"
                   width={["100%", "158px"]}
