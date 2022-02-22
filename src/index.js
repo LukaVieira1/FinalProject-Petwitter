@@ -47,6 +47,16 @@ const theme = extendTheme({
           color: "cyan.400",
           borderColor: "cyan.400",
         },
+        menu: {
+          backgroundColor: "white",
+          color: "gray.800",
+          ":focus": {
+            color: "cyan.400",
+            backgroundColor: "rgba(0, 172, 193, 0.1)",
+            borderColor: "cyan.400",
+            borderWidth: "2px",
+          },
+        },
       },
     },
   },

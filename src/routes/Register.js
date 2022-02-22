@@ -147,50 +147,39 @@ function Login() {
               Deve conter no mínimo um número e uma letra maiúscula{" "}
             </Text>
             {/* TODO: Waiting figma instructions for this route and fix the button in mobile screen */}
-            <Flex justify={("center", "flex-end")} wrap={"wrap"}>
-              <ReachLink to="/???">
-                <Button
-                  display={["none", "flex"]}
-                  variant="outline"
-                  mt="40px"
-                  width={["100%", "158px"]}
-                  height={["40px"]}
-                  type="submit"
-                >
-                  Cancelar
-                </Button>
-              </ReachLink>
-              <ReachLink to="/login">
-                <Button
-                  ml={["0", "50px"]}
-                  variant="solid"
-                  mt="40px"
-                  width={["100%", "158px"]}
-                  height={["40px"]}
-                  type="submit"
-                >
-                  Registrar
-                </Button>
-              </ReachLink>
-            </Flex>
+
+            <ReachLink to="/login">
+              <Button
+                variant="solid"
+                mt="40px"
+                width={["100%"]}
+                height={["40px"]}
+                type="submit"
+              >
+                Registrar
+              </Button>
+            </ReachLink>
           </FormControl>
-          <Text
+          <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
+            <Text mt={["24px"]}>Já possui cadastro?</Text>
+            <Link
+              mt={["0", "24px"]}
+              ml={["0", "5px"]}
+              textDecoration={["underline"]}
+              color="cyan.400"
+              as={ReachLink}
+              to="/login"
+            >
+              Faça login
+            </Link>
+          </Flex>
+          <Image
             display={["flex", "none"]}
-            mt={["24px"]}
-            alignSelf={["flex-start"]}
-          >
-            Ja possui cadastro?
-          </Text>
-          <Link
-            display={["flex", "none"]}
-            textDecoration={["underline"]}
-            color="cyan.400"
-            alignSelf={["flex-start"]}
-            as={ReachLink}
-            to="/login"
-          >
-            Faça login
-          </Link>
+            mt={["62px"]}
+            width={["180px"]}
+            src={["images/cyanLogo.png"]}
+            alt="petwitterLogo"
+          />
         </Flex>
       </Flex>
     </>
