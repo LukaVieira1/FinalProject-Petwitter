@@ -8,14 +8,10 @@ import {
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  Input,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
+  Container,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 
 import { useRef } from "react";
@@ -25,11 +21,16 @@ function Navbar() {
   const btnRef = useRef();
 
   return (
-    <>
+    <Container p={0} maxW={"container.xl"}>
+      <Grid templateColumns="repeat(9, 1fr)">
+        <GridItem colSpan={2}> </GridItem>
+        <GridItem colSpan={1} />
+      </Grid>
       <Flex
-        boxShadow={["0px 2px 4px rgba(33, 33, 33, 0.2)"]}
-        p={["16px 0 14px 16px"]}
-        alignItems={"center"}
+        boxShadow={["0px 2px 4px rgba(33, 33, 33, 0.2)", "none"]}
+        p={["16px 0 14px 16px", "24px 36px 0 36px"]}
+        alignItems={["center", "flex-start"]}
+        direction={["row", "column"]}
         height={["48px"]}
       >
         <Button
@@ -70,7 +71,7 @@ function Navbar() {
                   </Button>
                   <Button colorScheme="cyan.400" variant="menu">
                     {/* TODO: ROUTE TO MY PROFILE */}
-                    <Link to={"/???"}>Meu Perfil</Link>
+                    <Link to={"/???"}>Meu Petfil</Link>
                   </Button>
                 </Flex>
               </DrawerBody>
@@ -79,15 +80,32 @@ function Navbar() {
         </Drawer>
 
         <Image
-          height={["28px"]}
-          width={["116px"]}
-          ml={["84px"]}
+          height={["28px", "54px"]}
+          width={["116px", "225px"]}
+          ml={["84px", "0"]}
           src="images/cyanLogo.png"
           alt="Logo"
         />
+        <Flex ml={"50px"} display={["none", "flex"]} direction="column">
+          <Button fontWeight={"bold"} colorScheme="cyan.400" variant="menu">
+            <Link to={"/home"}>
+              <Image
+                height={["17px"]}
+                width={["20px"]}
+                src="images/homeIcon.png"
+                alt="Icon"
+              />
+              Home
+            </Link>
+          </Button>
+          <Button fontWeight={"bold"} colorScheme="cyan.400" variant="menu">
+            {/* TODO: ROUTE TO MY PROFILE */}
+            <Link to={"/???"}>Meu Petfil</Link>
+          </Button>
+        </Flex>
       </Flex>
       <Outlet />
-    </>
+    </Container>
   );
 }
 

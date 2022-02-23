@@ -17,7 +17,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 // TODO: FEEDBACK AND NOTIFICATION FOR USER
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -148,7 +148,7 @@ function Login() {
             </Text>
             {/* TODO: Waiting figma instructions for this route and fix the button in mobile screen */}
 
-            <ReachLink to="/login">
+            <ReachLink to="/home">
               <Button
                 variant="solid"
                 mt="40px"
@@ -186,4 +186,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

@@ -1,4 +1,5 @@
-import { Tweet } from "../components/Tweet";
+import Tweet from "../components/Tweet";
+import { ModalTweet } from "../components/ModalTweet";
 //TODO: RECIEVE DATA FROM DATABASE
 const tempData = [
   {
@@ -104,15 +105,20 @@ const tempData = [
 ];
 
 const Home = () => {
-  return tempData?.map((user) => (
-    <Tweet
-      name={user.name}
-      tweet={user.tweet}
-      postTime={user.postTime}
-      username={user.username}
-      photo={user.photo}
-    />
-  ));
+  return (
+    <>
+      {tempData?.map((user) => (
+        <Tweet
+          name={user.name}
+          tweet={user.tweet}
+          postTime={user.postTime}
+          username={user.username}
+          photo={user.photo}
+        />
+      ))}
+      <ModalTweet />
+    </>
+  );
 };
 
 export default Home;

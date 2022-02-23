@@ -1,10 +1,15 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Container, Flex, Image, Text } from "@chakra-ui/react";
 
-export const Tweet = (props) => {
+const Tweet = (props) => {
   const { photo, name, username, postTime, tweet } = props;
 
   return (
-    <Flex borderBottom={"1px solid #EEEEEE"} p={["20px 16px 16px 16px"]}>
+    <Flex
+      borderBottom={"1px solid #EEEEEE"}
+      borderRight={["none", "1px solid #EEEEEE"]}
+      borderLeft={["none", "1px solid #EEEEEE"]}
+      p={["20px 16px 16px 16px"]}
+    >
       <Image
         width={["48px", "40px"]}
         height={["48px", "40px"]}
@@ -43,3 +48,5 @@ export const Tweet = (props) => {
     </Flex>
   );
 };
+
+export default Tweet;
