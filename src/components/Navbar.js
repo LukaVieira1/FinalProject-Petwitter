@@ -5,15 +5,19 @@ import {
   Button,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   Input,
   useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+
 import { useRef } from "react";
 
 function Navbar() {
@@ -62,10 +66,11 @@ function Navbar() {
               <DrawerBody p={"0"} mt={"36px"}>
                 <Flex direction={"column"}>
                   <Button colorScheme="cyan.400" variant="menu">
-                    Home
+                    <Link to={"/home"}>Home</Link>
                   </Button>
                   <Button colorScheme="cyan.400" variant="menu">
-                    Meu Perfil
+                    {/* TODO: ROUTE TO MY PROFILE */}
+                    <Link to={"/???"}>Meu Perfil</Link>
                   </Button>
                 </Flex>
               </DrawerBody>

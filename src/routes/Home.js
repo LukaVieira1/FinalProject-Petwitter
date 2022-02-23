@@ -41,6 +41,66 @@ const tempData = [
     username: "lvieira",
     postTime: "2s",
   },
+  {
+    id: 1,
+    name: "Luka Vieira",
+    tweet:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    photo:
+      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
+    username: "lvieira",
+    postTime: "2s",
+  },
+  {
+    id: 1,
+    name: "Luka Vieira",
+    tweet:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    photo:
+      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
+    username: "lvieira",
+    postTime: "2s",
+  },
+  {
+    id: 1,
+    name: "Luka Vieira",
+    tweet:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    photo:
+      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
+    username: "lvieira",
+    postTime: "2s",
+  },
+  {
+    id: 1,
+    name: "Luka Vieira",
+    tweet:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    photo:
+      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
+    username: "lvieira",
+    postTime: "2s",
+  },
+  {
+    id: 1,
+    name: "Luka Vieira",
+    tweet:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    photo:
+      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
+    username: "lvieira",
+    postTime: "2s",
+  },
+  {
+    id: 1,
+    name: "Luka Vieira",
+    tweet:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    photo:
+      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
+    username: "lvieira",
+    postTime: "2s",
+  },
 ];
 
 const Home = () => {
