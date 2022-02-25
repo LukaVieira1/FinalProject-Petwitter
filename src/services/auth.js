@@ -1,6 +1,7 @@
 import client from "../providers/client";
 
 export const login = (data) => client.post("/login", data);
+export const register = (data) => client.post("/signup", data);
 
 export const getFromStorage = (key) => JSON.parse(localStorage.getItem(key));
 

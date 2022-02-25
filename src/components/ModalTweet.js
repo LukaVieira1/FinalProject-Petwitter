@@ -1,4 +1,6 @@
 import { AddIcon } from "@chakra-ui/icons";
+import { useEffect, useState } from "react";
+import { postPetweet } from "../services/petweets";
 import {
   Button,
   Flex,
@@ -11,9 +13,25 @@ import {
   ModalOverlay,
   Textarea,
   useDisclosure,
+  FormControl,
 } from "@chakra-ui/react";
 export function ModalTweet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [petweetsChange, setPetweetsChange] = useState(false);
+
+  async function handleSubmit(event) {
+    setPetweetsChange(!petweetsChange);
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const content = formData.get("content");
+
+    try {
+      await postPetweet({ content });
+    } catch (error) {
+      console.log(error);
+    }
+    event.target.reset();
+  }
 
   return (
     <>
@@ -38,7 +56,6 @@ export function ModalTweet() {
               Cancelar{" "}
             </ModalCloseButton>
             <ModalHeader p={"8px 8px 8px 0"}>
-              {/* TODO: TAKE DATA FROM TEXT AREA AND SEND TO BACK END */}
               <Button
                 borderRadius={"10px"}
                 variant="solid"
@@ -53,21 +70,24 @@ export function ModalTweet() {
 
           <ModalBody>
             <Flex>
-              <Image
-                width={"37px"}
-                height={"37px"}
-                borderRadius={"50%"}
-                src={
-                  "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
-                }
-                alt={""}
-              />
-              <Textarea
-                resize={"none"}
-                focusBorderColor="none"
-                border={"none"}
-                placeholder="O que está acontecendo?"
-              />
+              <FormControl as={"form"} onSubmit={handleSubmit}>
+                <Image
+                  width={"37px"}
+                  height={"37px"}
+                  borderRadius={"50%"}
+                  src={
+                    "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+                  }
+                  alt={""}
+                />
+                <Textarea
+                  resize={"none"}
+                  focusBorderColor="none"
+                  border={"none"}
+                  placeholder="O que está acontecendo?"
+                  name="content"
+                />
+              </FormControl>
             </Flex>
           </ModalBody>
         </ModalContent>

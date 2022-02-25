@@ -1,111 +1,37 @@
 import Tweet from "../components/Tweet";
 import { ModalTweet } from "../components/ModalTweet";
-import { Flex, Image, Textarea, Button } from "@chakra-ui/react";
-//TODO: RECIEVE DATA FROM DATABASE
-const tempData = [
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 2,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "1h",
-  },
-  {
-    id: 2,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "1h",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-  {
-    id: 1,
-    name: "Luka Vieira",
-    tweet:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    photo:
-      "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg",
-    username: "lvieira",
-    postTime: "2s",
-  },
-];
+import { Flex, Image, Textarea, Button, FormControl } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { getAllPetweets, postPetweet } from "../services/petweets";
 
 const Home = () => {
+  const [petweets, setPetweets] = useState([]);
+  const [petweetsChange, setPetweetsChange] = useState(false);
+
+  async function handleSubmit(event) {
+    setPetweetsChange(!petweetsChange);
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const content = formData.get("content");
+
+    try {
+      await postPetweet({ content });
+    } catch (error) {
+      console.log(error);
+    }
+    event.target.reset();
+  }
+  useEffect(() => {
+    try {
+      const request = async () => {
+        const response = await getAllPetweets();
+        setPetweets(response.data.data.petweets);
+      };
+      request();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [petweetsChange]);
   return (
     <>
       {/* TODO: characters limit and indicator  */}
@@ -124,34 +50,44 @@ const Home = () => {
           src={
             "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
           }
-          alt={""}
+          alt={"avatar"}
         />
-        <Textarea
-          resize={"none"}
-          focusBorderColor="none"
-          border={"none"}
-          placeholder="O que está acontecendo?"
-        />
-        <Flex m={"147px 30px 25px 0"}>
-          <Button
-            borderRadius={"10px"}
-            variant="solid"
-            width={"92px"}
-            height={["40px"]}
-            type="submit"
-          >
-            Petwittar
-          </Button>
-        </Flex>
+        <FormControl as={"form"} onSubmit={handleSubmit}>
+          <Flex>
+            <Textarea
+              resize={"none"}
+              focusBorderColor="none"
+              border={"none"}
+              placeholder="O que está acontecendo?"
+              name="content"
+            />
+            <Button
+              m={"103px 30px 25px 0"}
+              mr={"30px"}
+              mt="103px"
+              mb={"25px"}
+              borderRadius={"10px"}
+              variant="solid"
+              width={"92px"}
+              height={["40px"]}
+              type="submit"
+            >
+              Petwittar
+            </Button>
+          </Flex>
+        </FormControl>
       </Flex>
 
-      {tempData?.map((user) => (
+      {petweets?.map((user) => (
         <Tweet
-          name={user.name}
-          tweet={user.tweet}
-          postTime={user.postTime}
-          username={user.username}
-          photo={user.photo}
+          key={user.user.id}
+          name={user.user.name}
+          tweet={user.content}
+          postTime={"2s"}
+          username={user.user.username}
+          photo={
+            "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+          }
         />
       ))}
       <ModalTweet />

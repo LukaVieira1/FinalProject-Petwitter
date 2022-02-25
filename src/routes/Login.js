@@ -20,10 +20,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 function Login() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { signin } = useAuth();
-
-  const from = location.state?.from?.pathname || "/";
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -52,6 +49,7 @@ function Login() {
         >
           <Image
             display={["none", "flex"]}
+            minWidth="418px"
             src="images/whiteLogo.png"
             alt="logo"
           />

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Flex,
   Text,
@@ -14,18 +14,16 @@ import {
 import { useState } from "react";
 import { Link as ReachLink } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { register } from "../services/auth";
+import { useAuth } from "../context/auth-context";
 
 // TODO: FEEDBACK AND NOTIFICATION FOR USER
 
 function Register() {
+  const { signin } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const from = location.state?.from?.pathname || "/";
-
   async function handleSubmit(event) {
     event.preventDefault();
-    //todo: send form data to back end
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
@@ -38,8 +36,15 @@ function Register() {
       name,
       username,
     };
-
-    navigate(from, { replace: true });
+    try {
+      const response = await register(data);
+      if (response) {
+        await signin({ email: data.email, password: data.password });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    navigate("/home", { replace: true });
   }
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -61,6 +66,7 @@ function Register() {
         >
           <Image
             display={["none", "flex"]}
+            minWidth="418px"
             src="images/whiteLogo.png"
             alt="logo"
           />
@@ -96,12 +102,12 @@ function Register() {
           >
             Cadastro
           </Text>
-          <FormControl mt={["32px"]}>
+          <FormControl as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
             <FormLabel htmlFor="email">Nome</FormLabel>
             <Input
               width={["100%"]}
               height={["40px"]}
-              id="text"
+              name="name"
               type="text"
               placeholder="Nome"
             />
@@ -111,7 +117,7 @@ function Register() {
             <Input
               width={["100%"]}
               height={["40px"]}
-              id="email"
+              name="email"
               type="email"
               placeholder="Email"
             />
@@ -121,7 +127,7 @@ function Register() {
             <Input
               width={["100%"]}
               height={["40px"]}
-              id="username"
+              name="username"
               type="text"
               placeholder="EX.: billbuldog"
             />
@@ -132,7 +138,7 @@ function Register() {
               <Input
                 width={["100%"]}
                 height={["40px"]}
-                id="Senha"
+                name="password"
                 type={show ? "text" : "password"}
                 placeholder="Senha"
               />
@@ -154,18 +160,15 @@ function Register() {
               Deve conter no mínimo um número e uma letra maiúscula{" "}
             </Text>
             {/* TODO: Waiting figma instructions for this route and fix the button in mobile screen */}
-
-            <ReachLink to="/home">
-              <Button
-                variant="solid"
-                mt="40px"
-                width={["100%"]}
-                height={["40px"]}
-                type="submit"
-              >
-                Registrar
-              </Button>
-            </ReachLink>
+            <Button
+              variant="solid"
+              mt="40px"
+              width={["100%"]}
+              height={["40px"]}
+              type="submit"
+            >
+              Registrar
+            </Button>
           </FormControl>
           <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
             <Text mt={["24px"]}>Já possui cadastro?</Text>
