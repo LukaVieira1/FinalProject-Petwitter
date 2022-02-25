@@ -28,12 +28,12 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
     await signin({ email, password });
-    navigate(from, { replace: true });
+    navigate("/home", { replace: true });
   }
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -108,12 +108,13 @@ function Login() {
           >
             Login
           </Text>
-          <FormControl mt={["32px"]}>
+
+          <FormControl as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
             <FormLabel htmlFor="email">Email</FormLabel>
             <Input
               width={["100%"]}
               height={["40px"]}
-              id="email"
+              name="email"
               type="email"
               placeholder="Email"
             />
@@ -135,7 +136,7 @@ function Login() {
               <Input
                 width={["100%"]}
                 height={["40px"]}
-                id="Senha"
+                name="password"
                 type={show ? "text" : "password"}
                 placeholder="Senha"
               />
@@ -153,17 +154,15 @@ function Login() {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <ReachLink to="/home">
-              <Button
-                variant="solid"
-                mt="40px"
-                width={["100%"]}
-                height={["40px"]}
-                type="submit"
-              >
-                Entrar
-              </Button>
-            </ReachLink>
+            <Button
+              variant="solid"
+              mt="40px"
+              width={["100%"]}
+              height={["40px"]}
+              type="submit"
+            >
+              Entrar
+            </Button>
           </FormControl>
           <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
             <Text mt={["24px"]}>Ainda não possui uma conta?</Text>

@@ -1,5 +1,6 @@
 import Tweet from "../components/Tweet";
 import { ModalTweet } from "../components/ModalTweet";
+import { Flex, Image, Textarea, Button } from "@chakra-ui/react";
 //TODO: RECIEVE DATA FROM DATABASE
 const tempData = [
   {
@@ -107,6 +108,43 @@ const tempData = [
 const Home = () => {
   return (
     <>
+      {/* TODO: characters limit and indicator  */}
+      <Flex
+        p={"34px 0 0 27px"}
+        borderBottom={"1px solid rgba(0, 0, 0, 0.1)"}
+        boxShadow={"0px 10px 0px #E7ECF0;"}
+        borderRight={"1px solid #EEEEEE"}
+        borderLeft={"1px solid #EEEEEE"}
+        display={["none", "flex"]}
+      >
+        <Image
+          width={"48px"}
+          height={"48px"}
+          borderRadius={"50%"}
+          src={
+            "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+          }
+          alt={""}
+        />
+        <Textarea
+          resize={"none"}
+          focusBorderColor="none"
+          border={"none"}
+          placeholder="O que está acontecendo?"
+        />
+        <Flex m={"147px 30px 25px 0"}>
+          <Button
+            borderRadius={"10px"}
+            variant="solid"
+            width={"92px"}
+            height={["40px"]}
+            type="submit"
+          >
+            Petwittar
+          </Button>
+        </Flex>
+      </Flex>
+
       {tempData?.map((user) => (
         <Tweet
           name={user.name}

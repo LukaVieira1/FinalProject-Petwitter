@@ -32,6 +32,13 @@ function Register() {
     const name = formData.get("name");
     const username = formData.get("username");
 
+    const data = {
+      email,
+      password,
+      name,
+      username,
+    };
+
     navigate(from, { replace: true });
   }
   const [show, setShow] = useState(false);

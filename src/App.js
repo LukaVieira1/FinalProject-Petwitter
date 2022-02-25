@@ -11,8 +11,16 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route element={<Navbar />}>
-          <Route path="/home" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Navbar />
+            </RequireAuth>
+          }
+        >
+          {" "}
+          <Route index path="/home" element={<Home />} />{" "}
         </Route>
       </Routes>
     </AuthProvider>
