@@ -20,8 +20,7 @@ export function ModalTweet() {
   const [petweetsChange, setPetweetsChange] = useState(false);
 
   async function handleSubmit(event) {
-    setPetweetsChange(!petweetsChange);
-    event.preventDefault();
+    // event.preventDefault();
     const formData = new FormData(event.target);
     const content = formData.get("content");
 
@@ -55,22 +54,12 @@ export function ModalTweet() {
             <ModalCloseButton m={"14px 0 14px 30px"} position={"revert"}>
               Cancelar{" "}
             </ModalCloseButton>
-            <ModalHeader p={"8px 8px 8px 0"}>
-              <Button
-                borderRadius={"10px"}
-                variant="solid"
-                width={"73px"}
-                height={["32px"]}
-                type="submit"
-              >
-                Petwittar
-              </Button>
-            </ModalHeader>
+            <ModalHeader p={"8px 8px 8px 0"}></ModalHeader>
           </Flex>
 
           <ModalBody>
-            <Flex>
-              <FormControl as={"form"} onSubmit={handleSubmit}>
+            <FormControl as={"form"} onSubmit={handleSubmit}>
+              <Flex>
                 <Image
                   width={"37px"}
                   height={"37px"}
@@ -87,8 +76,20 @@ export function ModalTweet() {
                   placeholder="O que está acontecendo?"
                   name="content"
                 />
-              </FormControl>
-            </Flex>
+                <Button
+                  position={"fixed"}
+                  top="49px"
+                  right={"8px"}
+                  borderRadius={"10px"}
+                  variant="solid"
+                  width={"73px"}
+                  height={["32px"]}
+                  type="submit"
+                >
+                  Petwittar
+                </Button>
+              </Flex>
+            </FormControl>
           </ModalBody>
         </ModalContent>
       </Modal>
