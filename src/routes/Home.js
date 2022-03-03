@@ -3,13 +3,13 @@ import { ModalTweet } from "../components/ModalTweet";
 import { Flex, Image, Textarea, Button, FormControl } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getAllPetweets, postPetweet } from "../services/petweets";
+import { useChange } from "../context/petweetChange-context";
 
 const Home = () => {
   const [petweets, setPetweets] = useState([]);
-  const [petweetsChange, setPetweetsChange] = useState(false);
+  const { petweetsChange, setPetweetsChange } = useChange();
 
   async function handleSubmit(event) {
-    setPetweetsChange(!petweetsChange);
     event.preventDefault();
     const formData = new FormData(event.target);
     const content = formData.get("content");
@@ -19,6 +19,8 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
+    setPetweetsChange(!petweetsChange);
+
     event.target.reset();
   }
   useEffect(() => {
@@ -32,6 +34,7 @@ const Home = () => {
       console.log(error);
     }
   }, [petweetsChange]);
+
   return (
     <>
       {/* TODO: characters limit and indicator  */}
@@ -83,7 +86,7 @@ const Home = () => {
           key={user.user.id}
           name={user.user.name}
           tweet={user.content}
-          postTime={"2s"}
+          postTime={user.createdAt}
           username={user.user.username}
           photo={
             "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"

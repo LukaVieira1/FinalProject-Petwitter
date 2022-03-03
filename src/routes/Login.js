@@ -30,7 +30,11 @@ function Login() {
     const password = formData.get("password");
 
     await signin({ email, password });
-    navigate("/home", { replace: true });
+    if (signin) {
+      navigate("/home", { replace: true });
+    } else {
+      navigate("/login", { replace: false });
+    }
   }
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);

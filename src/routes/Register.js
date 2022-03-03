@@ -16,7 +16,7 @@ import { Link as ReachLink } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { register } from "../services/auth";
 import { useAuth } from "../context/auth-context";
-
+import * as yup from "yup";
 // TODO: FEEDBACK AND NOTIFICATION FOR USER
 
 function Register() {

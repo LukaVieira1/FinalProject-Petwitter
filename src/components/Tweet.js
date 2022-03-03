@@ -1,8 +1,11 @@
-import { Container, Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
+import TimeAgo from "react-timeago";
+import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
+import ptBrStrings from "react-timeago/lib/language-strings/pt-br";
 
 const Tweet = (props) => {
   const { photo, name, username, postTime, tweet } = props;
-
+  const formatter = buildFormatter(ptBrStrings);
   return (
     <Flex
       borderBottom={"1px solid #EEEEEE"}
@@ -38,7 +41,7 @@ const Tweet = (props) => {
             color={["#757575", "#828282"]}
             ml={["4px"]}
           >
-            {postTime}
+            <TimeAgo date={new Date(postTime)} formatter={formatter} />
           </Text>
         </Flex>
         <Text color={["#141619", "#333333"]} mt={"4px"}>

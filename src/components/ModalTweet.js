@@ -1,5 +1,4 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
 import { postPetweet } from "../services/petweets";
 import {
   Button,
@@ -15,12 +14,13 @@ import {
   useDisclosure,
   FormControl,
 } from "@chakra-ui/react";
+import { useChange } from "../context/petweetChange-context";
 export function ModalTweet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [petweetsChange, setPetweetsChange] = useState(false);
+  const { petweetsChange, setPetweetsChange } = useChange();
 
   async function handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     const formData = new FormData(event.target);
     const content = formData.get("content");
 
@@ -29,6 +29,8 @@ export function ModalTweet() {
     } catch (error) {
       console.log(error);
     }
+    setPetweetsChange(!petweetsChange);
+    onClose();
     event.target.reset();
   }
 
