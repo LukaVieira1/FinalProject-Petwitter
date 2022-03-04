@@ -1,22 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
-  Flex,
-  Text,
-  FormControl,
-  Input,
-  FormLabel,
   Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Input,
   InputGroup,
   InputRightElement,
-  Image,
   Link,
+  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link as ReachLink } from "react-router-dom";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { register } from "../services/auth";
+import { Link as ReachLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
-import * as yup from "yup";
+import { register } from "../services/auth";
 // TODO: FEEDBACK AND NOTIFICATION FOR USER
 
 function Register() {
