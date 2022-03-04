@@ -13,12 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/auth-context";
 import { register } from "../services/auth";
 // TODO: FEEDBACK AND NOTIFICATION FOR USER
 
 function Register() {
-  const { signin } = useAuth();
   const navigate = useNavigate();
   async function handleSubmit(event) {
     event.preventDefault();
