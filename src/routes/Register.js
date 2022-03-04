@@ -68,7 +68,7 @@ function Register() {
             display={["flex", "none"]}
             width={["52px"]}
             height={["52px"]}
-            src="images/whitestepSymbol.png"
+            src="images/whiteStepSymbol.png"
             alt="stepSymbol"
           />
         </Flex>
