@@ -35,14 +35,12 @@ function Register() {
       username,
     };
     try {
-      const response = await register(data);
-      if (response) {
-        await signin({ email: data.email, password: data.password });
-      }
+      await register(data);
+      navigate("/login", { replace: true });
     } catch (error) {
+      //TODO: ALERTA TOASTY CHAKRA
       console.log(error);
     }
-    navigate("/home", { replace: true });
   }
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);

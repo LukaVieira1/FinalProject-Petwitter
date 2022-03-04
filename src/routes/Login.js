@@ -27,12 +27,11 @@ function Login() {
     const formData = new FormData(event.target);
     const email = formData.get("email");
     const password = formData.get("password");
-
-    await signin({ email, password });
-    if (signin) {
+    try {
+      await signin({ email, password });
       navigate("/home", { replace: true });
-    } else {
-      navigate("/login", { replace: false });
+    } catch (error) {
+      //TODO: ALERTA TOASTY CHAKRA
     }
   }
   const [show, setShow] = useState(false);
