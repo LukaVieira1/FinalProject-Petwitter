@@ -10,16 +10,19 @@ import {
   InputRightElement,
   Link,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import { register } from "../services/auth";
-// TODO: FEEDBACK AND NOTIFICATION FOR USER
 
 function Register() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
   async function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
@@ -34,10 +37,16 @@ function Register() {
     };
     try {
       await register(data);
+      setIsLoading(false);
       navigate("/login", { replace: true });
     } catch (error) {
-      //TODO: ALERTA TOASTY CHAKRA
-      console.log(error);
+      toast({
+        title: "Conta não foi criada.",
+        description: error.response.data,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   }
   const [show, setShow] = useState(false);
@@ -153,8 +162,9 @@ function Register() {
             <Text fontSize={["10px"]} mt={["4px"]}>
               Deve conter no mínimo um número e uma letra maiúscula{" "}
             </Text>
-            {/* TODO: Waiting figma instructions for this route and fix the button in mobile screen */}
+
             <Button
+              isLoading={isLoading}
               variant="solid"
               mt="40px"
               width={["100%"]}

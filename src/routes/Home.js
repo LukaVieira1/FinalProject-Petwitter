@@ -1,16 +1,32 @@
 import Tweet from "../components/Tweet";
 import { ModalTweet } from "../components/ModalTweet";
-import { Flex, Image, Textarea, Button, FormControl } from "@chakra-ui/react";
+import {
+  Flex,
+  Image,
+  Textarea,
+  Button,
+  FormControl,
+  Text,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getAllPetweets, postPetweet } from "../services/petweets";
 import { useChange } from "../context/petweetChange-context";
 
 const Home = () => {
   const [petweets, setPetweets] = useState([]);
+  const [textLenght, setTextLenght] = useState(0);
   const { petweetsChange, setPetweetsChange } = useChange();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (event) => {
+    let inputValue = event.target.value;
+    setTextLenght(inputValue.length);
+    console.log(textLenght);
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.target);
     const content = formData.get("content");
 
@@ -20,7 +36,7 @@ const Home = () => {
       console.log(error);
     }
     setPetweetsChange(!petweetsChange);
-
+    setIsLoading(false);
     event.target.reset();
   }
   useEffect(() => {
@@ -37,7 +53,6 @@ const Home = () => {
 
   return (
     <>
-      {/* TODO: characters limit and indicator  */}
       <Flex
         p={"34px 0 0 27px"}
         borderBottom={"1px solid rgba(0, 0, 0, 0.1)"}
@@ -63,12 +78,16 @@ const Home = () => {
               border={"none"}
               placeholder="O que está acontecendo?"
               name="content"
+              onChange={handleChange}
             />
+
+            <Text color={"#828282"} fontWeight="400" m={"110px 10px 25px 0"}>
+              {textLenght}/140
+            </Text>
             <Button
+              sLoading={isLoading}
+              isDisabled={textLenght !== 0 ? false : true}
               m={"103px 30px 25px 0"}
-              mr={"30px"}
-              mt="103px"
-              mb={"25px"}
               borderRadius={"10px"}
               variant="solid"
               width={"92px"}

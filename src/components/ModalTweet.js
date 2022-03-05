@@ -1,5 +1,6 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { postPetweet } from "../services/petweets";
+import { useState } from "react";
 import {
   Button,
   Flex,
@@ -13,14 +14,27 @@ import {
   Textarea,
   useDisclosure,
   FormControl,
+  Text,
 } from "@chakra-ui/react";
 import { useChange } from "../context/petweetChange-context";
 export function ModalTweet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { petweetsChange, setPetweetsChange } = useChange();
+  const [textLenght, setTextLenght] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleChange = (event) => {
+    let inputValue = event.target.value;
+    setTextLenght(inputValue.length);
+    console.log(textLenght);
+  };
+  const handleClose = () => {
+    onClose();
+    setTextLenght(0);
+  };
   async function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.target);
     const content = formData.get("content");
 
@@ -31,12 +45,12 @@ export function ModalTweet() {
     }
     setPetweetsChange(!petweetsChange);
     onClose();
+    setIsLoading(false);
     event.target.reset();
   }
 
   return (
     <>
-      {/* TODO: FIX BUTTON POSITION AND BORDERS */}
       <Button
         display={["flex", "none"]}
         position="fixed"
@@ -49,7 +63,7 @@ export function ModalTweet() {
       >
         <AddIcon borderBottomRadius={"2px"} />
       </Button>
-      <Modal onClose={onClose} size={"full"} isOpen={isOpen}>
+      <Modal onClose={handleClose} size={"full"} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent mt="33px">
           <Flex borderBottom={"1px solid #EEEEEE"} justify={"space-between"}>
@@ -72,13 +86,26 @@ export function ModalTweet() {
                   alt={""}
                 />
                 <Textarea
+                  maxLength={"140"}
                   resize={"none"}
                   focusBorderColor="none"
                   border={"none"}
                   placeholder="O que está acontecendo?"
                   name="content"
+                  onChange={handleChange}
                 />
+                <Text
+                  color={"#828282"}
+                  fontWeight="400"
+                  position={"fixed"}
+                  top="52px"
+                  right={"90px"}
+                >
+                  {textLenght}/140
+                </Text>
                 <Button
+                  isLoading={isLoading}
+                  isDisabled={textLenght !== 0 ? false : true}
                   position={"fixed"}
                   top="49px"
                   right={"8px"}

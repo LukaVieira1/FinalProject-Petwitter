@@ -5,6 +5,7 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Navbar from "./components/Navbar";
 import Home from "./routes/Home";
+import Profile from "./routes/Profile";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           >
             {" "}
             <Route index path="/home" element={<Home />} />{" "}
+            <Route index path="/profile/:username" element={<Profile />} />
           </Route>
         </Routes>
       </ChangeContextProvider>

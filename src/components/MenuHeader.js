@@ -10,10 +10,11 @@ import {
   DrawerContent,
   useDisclosure,
 } from "@chakra-ui/react";
-
+import { useAuth } from "../context/auth-context";
 import { useRef } from "react";
 
 const MenuHeader = () => {
+  const auth = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   return (
@@ -71,8 +72,7 @@ const MenuHeader = () => {
                   <Link to={"/home"}>Home</Link>
                 </Button>
                 <Button colorScheme="cyan.400" variant="menu">
-                  {/* TODO: ROUTE TO MY PROFILE */}
-                  <Link to={"/???"}>Meu Petfil</Link>
+                  <Link to={`/profile/${auth.user.username}`}>Meu Petfil</Link>
                 </Button>
               </Flex>
             </DrawerBody>

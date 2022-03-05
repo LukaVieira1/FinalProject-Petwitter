@@ -15,27 +15,25 @@ import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 
-// TODO: FEEDBACK AND NOTIFICATION FOR USER
-
 function Login() {
+  const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const { signin } = useAuth();
 
   async function handleSubmit(event) {
+    setIsLoading(true);
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const email = formData.get("email");
     const password = formData.get("password");
     try {
       await signin({ email, password });
+      setIsLoading(false);
       navigate("/home", { replace: true });
-    } catch (error) {
-      //TODO: ALERTA TOASTY CHAKRA
-    }
+    } catch (error) {}
   }
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
 
   return (
     <>
@@ -155,6 +153,7 @@ function Login() {
               </InputRightElement>
             </InputGroup>
             <Button
+              isLoading={isLoading}
               variant="solid"
               mt="40px"
               width={["100%"]}
