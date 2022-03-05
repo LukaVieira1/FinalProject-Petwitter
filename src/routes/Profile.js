@@ -23,7 +23,6 @@ const Profile = () => {
         const responsePetweets = await getPetweetsByUserId(
           responseUser.data.data.user.id
         );
-        console.log(responsePetweets);
         setPetweets(responsePetweets.data.data.petweets);
       };
       request();
@@ -31,7 +30,7 @@ const Profile = () => {
       console.log(error);
       // TODO: CHRAKA TOASTY
     }
-  }, []);
+  }, [username]);
   return (
     <>
       {/* TODO: characters limit and indicator  */}

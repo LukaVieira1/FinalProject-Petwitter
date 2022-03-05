@@ -85,7 +85,7 @@ const Home = () => {
               {textLenght}/140
             </Text>
             <Button
-              sLoading={isLoading}
+              isLoading={isLoading}
               isDisabled={textLenght !== 0 ? false : true}
               m={"103px 30px 25px 0"}
               borderRadius={"10px"}
@@ -102,7 +102,7 @@ const Home = () => {
 
       {petweets?.map((user) => (
         <Tweet
-          key={user.user.id}
+          key={user.id}
           name={user.user.name}
           tweet={user.content}
           postTime={user.createdAt}
