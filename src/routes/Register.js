@@ -1,4 +1,7 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import {
   Button,
   Flex,
@@ -14,30 +17,41 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
-import { register } from "../services/auth";
+import { signup } from "../services/auth";
 
 function Register() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setIsLoading(true);
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const name = formData.get("name");
-    const username = formData.get("username");
 
-    const data = {
-      email,
-      password,
-      name,
-      username,
-    };
+  let schema = yup.object().shape({
+    name: yup
+      .string("Campo nome precisa ser um texto")
+      .required("Campo nome é necessário"),
+    password: yup
+      .string("Campo senha precisa ser um texto")
+      .required("Campo senha é necessário")
+      .matches(
+        /^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])(?=.{8,})/,
+        "Deve conter 8 caracteres, uma letra maiúscula, uma minúscula e um número"
+      ),
+    email: yup
+      .string("Campo email precisa ser um texto")
+      .required("Campo email é necessário"),
+    username: yup
+      .string("Campo usuario precisa ser um texto")
+      .required("Campo usuario é necessário"),
+  });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  async function onSubmit(data) {
     try {
-      await register(data);
-      setIsLoading(false);
+      await signup(data);
       navigate("/login", { replace: true });
     } catch (error) {
       toast({
@@ -49,7 +63,7 @@ function Register() {
       });
     }
   }
-  const [show, setShow] = useState(false);
+
   const handleClick = () => setShow(!show);
 
   return (
@@ -105,35 +119,48 @@ function Register() {
           >
             Cadastro
           </Text>
-          <FormControl as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
+          <FormControl
+            as={"form"}
+            onSubmit={handleSubmit(onSubmit)}
+            mt={["32px"]}
+          >
             <FormLabel htmlFor="email">Nome</FormLabel>
             <Input
               width={["100%"]}
               height={["40px"]}
-              name="name"
               type="text"
               placeholder="Nome"
+              {...register("name")}
             />
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              {errors.name && <span>{errors.name.message}</span>}
+            </Text>
             <FormLabel mt="16px" htmlFor="email">
               Email
             </FormLabel>
             <Input
               width={["100%"]}
               height={["40px"]}
-              name="email"
               type="email"
               placeholder="Email"
+              {...register("email")}
             />
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              {errors.email && <span>{errors.email.message}</span>}
+            </Text>
             <FormLabel mt="16px" htmlFor="email">
               Nome de usuário
             </FormLabel>
             <Input
               width={["100%"]}
               height={["40px"]}
-              name="username"
               type="text"
               placeholder="EX.: billbuldog"
+              {...register("username")}
             />
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              {errors.username && <span>{errors.username.message}</span>}
+            </Text>
             <FormLabel mt="16px" htmlFor="senha">
               Senha
             </FormLabel>
@@ -141,10 +168,11 @@ function Register() {
               <Input
                 width={["100%"]}
                 height={["40px"]}
-                name="password"
                 type={show ? "text" : "password"}
                 placeholder="Senha"
+                {...register("password")}
               />
+
               <InputRightElement width="4.5rem">
                 {/* TODO: FIX THE ICON (OUTLINE BORDER) */}
                 <Button
@@ -160,11 +188,11 @@ function Register() {
               </InputRightElement>
             </InputGroup>
             <Text fontSize={["10px"]} mt={["4px"]}>
-              Deve conter no mínimo um número e uma letra maiúscula{" "}
+              {errors.password && <span>{errors.password.message}</span>}
             </Text>
 
             <Button
-              isLoading={isLoading}
+              isLoading={isSubmitting}
               variant="solid"
               mt="40px"
               width={["100%"]}

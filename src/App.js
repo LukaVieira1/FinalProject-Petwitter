@@ -6,7 +6,6 @@ import Register from "./routes/Register";
 import Navbar from "./components/Navbar";
 import Home from "./routes/Home";
 import Profile from "./routes/Profile";
-
 function App() {
   return (
     <AuthProvider>
