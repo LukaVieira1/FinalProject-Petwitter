@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text, CircularProgress } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Tweet from "../components/Tweet";
 import { getPetweetsByUserId } from "../services/petweets";
@@ -8,10 +8,13 @@ import { useParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
 import ptBrStrings from "react-timeago/lib/language-strings/pt-br";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Profile = () => {
   const [petweets, setPetweets] = useState([]);
   const [user, setUser] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   let { username } = useParams();
   const formatter = buildFormatter(ptBrStrings);
 
@@ -21,16 +24,19 @@ const Profile = () => {
         const responseUser = await getUserByParams(username);
         setUser(responseUser.data.data.user);
         const responsePetweets = await getPetweetsByUserId(
-          responseUser.data.data.user.id
+          responseUser.data.data.user.id,
+          { page, perPage: 10 }
         );
-        setPetweets(responsePetweets.data.data.petweets);
+        setPetweets(petweets.concat(responsePetweets.data.petweets));
+        setHasMore(page < responsePetweets.data.pagination.pageCount);
       };
       request();
     } catch (error) {
       console.log(error);
       // TODO: CHRAKA TOASTY
     }
-  }, [username]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
   return (
     <>
       {/* TODO: characters limit and indicator  */}
@@ -91,18 +97,25 @@ const Profile = () => {
         </Flex>
       </Flex>
 
-      {petweets?.map((petweet) => (
-        <Tweet
-          key={petweet.id}
-          name={petweet.user.name}
-          tweet={petweet.content}
-          postTime={petweet.createdAt}
-          username={petweet.user.username}
-          photo={
-            "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
-          }
-        />
-      ))}
+      <InfiniteScroll
+        dataLength={petweets.length}
+        next={() => setPage(page + 1)}
+        hasMore={hasMore}
+        loader={<CircularProgress isIndeterminate color="cyan.400" />}
+      >
+        {petweets?.map((petweet) => (
+          <Tweet
+            key={petweet.id}
+            name={petweet.user.name}
+            tweet={petweet.content}
+            postTime={petweet.createdAt}
+            username={petweet.user.username}
+            photo={
+              "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+            }
+          />
+        ))}
+      </InfiniteScroll>
     </>
   );
 };

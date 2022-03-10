@@ -37,13 +37,13 @@ const MenuHeader = () => {
           color={"cyan.400"}
           backgroundColor={"white"}
         >
-          <Image height="16px" src="images/hamburguerButt.png" alt="Logo" />
+          <Image height="16px" src="/images/hamburguerButt.png" alt="Logo" />
         </Button>
         <Image
           height={["28px", "54px"]}
           width={["116px", "225px"]}
           ml={["84px", "0"]}
-          src="images/cyanLogo.png"
+          src="/images/cyanLogo.png"
           alt="Logo"
         />
       </Flex>

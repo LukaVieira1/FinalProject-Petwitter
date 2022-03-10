@@ -7,16 +7,20 @@ import {
   Button,
   FormControl,
   Text,
+  CircularProgress,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getAllPetweets, postPetweet } from "../services/petweets";
 import { useChange } from "../context/petweetChange-context";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Home = () => {
   const [petweets, setPetweets] = useState([]);
   const [textLenght, setTextLenght] = useState(0);
   const { petweetsChange, setPetweetsChange } = useChange();
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const handleChange = (event) => {
     let inputValue = event.target.value;
@@ -42,14 +46,16 @@ const Home = () => {
   useEffect(() => {
     try {
       const request = async () => {
-        const response = await getAllPetweets();
-        setPetweets(response.data.data.petweets);
+        const response = await getAllPetweets({ page, perPage: 10 });
+        setPetweets(petweets.concat(response.data.petweets));
+        setHasMore(page < response.data.pagination.pageCount);
       };
       request();
     } catch (error) {
       console.log(error);
     }
-  }, [petweetsChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [petweetsChange, page]);
 
   return (
     <>
@@ -100,18 +106,25 @@ const Home = () => {
         </FormControl>
       </Flex>
 
-      {petweets?.map((user) => (
-        <Tweet
-          key={user.id}
-          name={user.user.name}
-          tweet={user.content}
-          postTime={user.createdAt}
-          username={user.user.username}
-          photo={
-            "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
-          }
-        />
-      ))}
+      <InfiniteScroll
+        dataLength={petweets.length}
+        next={() => setPage(page + 1)}
+        hasMore={hasMore}
+        loader={<CircularProgress isIndeterminate color="cyan.400" />}
+      >
+        {petweets?.map((user) => (
+          <Tweet
+            key={user.id}
+            name={user.user.name}
+            tweet={user.content}
+            postTime={user.createdAt}
+            username={user.user.username}
+            photo={
+              "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+            }
+          />
+        ))}
+      </InfiniteScroll>
       <ModalTweet />
     </>
   );
