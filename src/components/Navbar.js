@@ -1,14 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
-import {
-  Flex,
-  Image,
-  Button,
-  Container,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import { Outlet } from "react-router-dom";
+import { Flex, Image, Container, Grid, GridItem, Icon } from "@chakra-ui/react";
 import MenuHeader from "./MenuHeader";
+import HomeIcon from "./HomeIcon";
+import PetfilIcon from "./PetfilIcon";
 import { useAuth } from "../context/auth-context";
+import CustomLink from "./CustomLink";
 
 function Navbar() {
   const auth = useAuth();
@@ -20,12 +16,19 @@ function Navbar() {
             <Flex p={"24px 36px"}>
               <Image minWidth={"225px"} src="/images/cyanLogo.png" alt="Logo" />
             </Flex>
-            <Button fontWeight={"bold"} colorScheme="cyan.400" variant="menu">
-              <Link to={"/home"}>Home</Link>
-            </Button>
-            <Button fontWeight={"bold"} colorScheme="cyan.400" variant="menu">
-              <Link to={`/profile/${auth.user.username}`}>Meu Petfil</Link>
-            </Button>
+
+            <CustomLink to={"/home"}>
+              <Icon mt={"5px"} mr="10px">
+                <HomeIcon />
+              </Icon>
+              Home
+            </CustomLink>
+            <CustomLink to={`/profile/${auth.user.username}`}>
+              <Icon mt={"5px"} mr="10px">
+                <PetfilIcon />
+              </Icon>
+              Meu Petfil
+            </CustomLink>
           </Flex>{" "}
         </GridItem>
         <GridItem colSpan={[9, 5]}>

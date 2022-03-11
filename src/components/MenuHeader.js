@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   Flex,
   Image,
@@ -12,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "../context/auth-context";
 import { useRef } from "react";
+import CustomLink from "./CustomLink";
 
 const MenuHeader = () => {
   const auth = useAuth();
@@ -68,12 +68,11 @@ const MenuHeader = () => {
 
             <DrawerBody p={"0"} mt={"36px"}>
               <Flex direction={"column"}>
-                <Button colorScheme="cyan.400" variant="menu">
-                  <Link to={"/home"}>Home</Link>
-                </Button>
-                <Button colorScheme="cyan.400" variant="menu">
-                  <Link to={`/profile/${auth.user.username}`}>Meu Petfil</Link>
-                </Button>
+                <CustomLink to={"/home"}>Home</CustomLink>
+
+                <CustomLink to={`/profile/${auth.user.username}`}>
+                  Meu Petfil
+                </CustomLink>
               </Flex>
             </DrawerBody>
           </Flex>

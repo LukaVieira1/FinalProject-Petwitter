@@ -38,7 +38,7 @@ const Profile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
   return (
-    <>
+    <Flex direction={"column"} overflow="auto">
       {/* TODO: characters limit and indicator  */}
       <Flex
         borderBottom={"1px solid rgba(0, 0, 0, 0.1)"}
@@ -101,7 +101,9 @@ const Profile = () => {
         dataLength={petweets.length}
         next={() => setPage(page + 1)}
         hasMore={hasMore}
-        loader={<CircularProgress isIndeterminate color="cyan.400" />}
+        loader={
+          <CircularProgress left={"50%"} isIndeterminate color="cyan.400" />
+        }
       >
         {petweets?.map((petweet) => (
           <Tweet
@@ -116,7 +118,7 @@ const Profile = () => {
           />
         ))}
       </InfiniteScroll>
-    </>
+    </Flex>
   );
 };
 
