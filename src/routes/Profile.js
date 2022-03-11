@@ -12,7 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const Profile = () => {
   const [petweets, setPetweets] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   let { username } = useParams();
@@ -23,23 +23,36 @@ const Profile = () => {
       const request = async () => {
         const responseUser = await getUserByParams(username);
         setUser(responseUser.data.data.user);
-        const responsePetweets = await getPetweetsByUserId(
-          responseUser.data.data.user.id,
-          { page, perPage: 10 }
-        );
-        setPetweets(petweets.concat(responsePetweets.data.petweets));
-        setHasMore(page < responsePetweets.data.pagination.pageCount);
       };
       request();
     } catch (error) {
       console.log(error);
-      // TODO: CHRAKA TOASTY
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, []);
+
+  useEffect(() => {
+    try {
+      const request = async () => {
+        const responsePetweets = await getPetweetsByUserId(user.id, {
+          page,
+          perPage: 10,
+        });
+        setPetweets(petweets.concat(responsePetweets.data.petweets));
+        setHasMore(page < responsePetweets.data.pagination.pageCount);
+      };
+      if (user) {
+        console.log(user);
+        request();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, user]);
+
   return (
-    <Flex direction={"column"} overflow="auto">
-      {/* TODO: characters limit and indicator  */}
+    <Flex direction={"column"}>
       <Flex
         borderBottom={"1px solid rgba(0, 0, 0, 0.1)"}
         borderRight={"1px solid #EEEEEE"}
@@ -66,12 +79,12 @@ const Profile = () => {
           }
           alt={"avatar"}
         />
-        <Flex mt={"63px"} ml={"16px"} direction={"column"}>
+        <Flex mt={["63px", "0"]} ml={"16px"} direction={"column"}>
           <Text color={"#141619"} fontWeight={"700"} fontSize={"22px"}>
-            {user.name}
+            {user?.name}
           </Text>
           <Text lineHeight={["22px"]} color={["#687684"]}>
-            @{user.username}
+            @{user?.username}
           </Text>
           <Text mt={"12px"} color={"#424242"}>
             {" "}
@@ -81,7 +94,7 @@ const Profile = () => {
             <CalendarIcon color={"#687684"} />
             <Text fontWeight={"400"} color={"gray.800"} ml={"4px"}>
               Entrou{" "}
-              <TimeAgo date={new Date(user.createdAt)} formatter={formatter} />
+              <TimeAgo date={new Date(user?.createdAt)} formatter={formatter} />
             </Text>
           </Flex>
           <Text
@@ -90,34 +103,36 @@ const Profile = () => {
             borderBottom={"4px solid #00ACC1"}
             fontWeight={"600"}
             color={"gray.800"}
-            mt={"18px"}
+            mt={["18px", "51px"]}
           >
             Petposts
           </Text>
         </Flex>
       </Flex>
 
-      <InfiniteScroll
-        dataLength={petweets.length}
-        next={() => setPage(page + 1)}
-        hasMore={hasMore}
-        loader={
-          <CircularProgress left={"50%"} isIndeterminate color="cyan.400" />
-        }
-      >
-        {petweets?.map((petweet) => (
-          <Tweet
-            key={petweet.id}
-            name={petweet.user.name}
-            tweet={petweet.content}
-            postTime={petweet.createdAt}
-            username={petweet.user.username}
-            photo={
-              "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
-            }
-          />
-        ))}
-      </InfiniteScroll>
+      <Flex direction={"column"} overflow="hidden">
+        <InfiniteScroll
+          dataLength={petweets.length}
+          next={() => setPage(page + 1)}
+          hasMore={hasMore}
+          loader={
+            <CircularProgress left={"50%"} isIndeterminate color="cyan.400" />
+          }
+        >
+          {petweets?.map((petweet) => (
+            <Tweet
+              key={petweet.id}
+              name={petweet.user.name}
+              tweet={petweet.content}
+              postTime={petweet.createdAt}
+              username={petweet.user.username}
+              photo={
+                "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+              }
+            />
+          ))}
+        </InfiniteScroll>
+      </Flex>
     </Flex>
   );
 };

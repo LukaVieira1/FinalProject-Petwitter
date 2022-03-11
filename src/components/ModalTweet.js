@@ -26,7 +26,6 @@ export function ModalTweet() {
   const handleChange = (event) => {
     let inputValue = event.target.value;
     setTextLenght(inputValue.length);
-    console.log(textLenght);
   };
   const handleClose = () => {
     onClose();
@@ -40,9 +39,7 @@ export function ModalTweet() {
 
     try {
       await postPetweet({ content });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     setPetweetsChange(!petweetsChange);
     onClose();
     setIsLoading(false);

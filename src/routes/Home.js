@@ -25,7 +25,6 @@ const Home = () => {
   const handleChange = (event) => {
     let inputValue = event.target.value;
     setTextLenght(inputValue.length);
-    console.log(textLenght);
   };
 
   async function handleSubmit(event) {
@@ -36,9 +35,7 @@ const Home = () => {
 
     try {
       await postPetweet({ content });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     setPetweetsChange(!petweetsChange);
     setIsLoading(false);
     event.target.reset();
@@ -51,9 +48,7 @@ const Home = () => {
         setHasMore(page < response.data.pagination.pageCount);
       };
       request();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [petweetsChange, page]);
 
@@ -110,7 +105,9 @@ const Home = () => {
         dataLength={petweets.length}
         next={() => setPage(page + 1)}
         hasMore={hasMore}
-        loader={<CircularProgress isIndeterminate color="cyan.400" />}
+        loader={
+          <CircularProgress left={"50%"} isIndeterminate color="cyan.400" />
+        }
       >
         {petweets?.map((user) => (
           <Tweet

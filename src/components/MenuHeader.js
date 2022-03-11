@@ -69,7 +69,6 @@ const MenuHeader = () => {
             <DrawerBody p={"0"} mt={"36px"}>
               <Flex direction={"column"}>
                 <CustomLink to={"/home"}>Home</CustomLink>
-
                 <CustomLink to={`/profile/${auth.user.username}`}>
                   Meu Petfil
                 </CustomLink>

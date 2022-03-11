@@ -4,8 +4,10 @@ import {
   useMatch,
   useResolvedPath,
 } from "react-router-dom";
+import MenuIcon from "./MenuIcon";
+import { Icon } from "@chakra-ui/react";
 
-const CustomLink = ({ children, to, ...props }) => {
+const CustomLink = ({ children, icon, to, ...props }) => {
   let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: true });
 
@@ -27,6 +29,9 @@ const CustomLink = ({ children, to, ...props }) => {
         to={to}
         {...props}
       >
+        <Icon mt={"5px"} mr="10px">
+          <MenuIcon icon={icon} fill={match ? "#00ACC1" : "#424242"} />
+        </Icon>
         {children}
       </Link>
     </Box>
