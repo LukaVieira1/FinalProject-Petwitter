@@ -1,7 +1,7 @@
 # Petwitter
 A aplicação consite em twitter para pets, onde é possivel logar, cadastrar, twittar e acessar pefil do usuario.
 
-https://petwitter.vercel.app/)
+https://petwitter.vercel.app/
 
 ## Pré-requisitos
 Tenha instalado em sua máquina as seguintes ferramentas:
