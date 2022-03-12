@@ -1,5 +1,5 @@
 import { Flex, Image, Text, CircularProgress } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import Tweet from "../components/Tweet";
 import { getPetweetsByUserId } from "../services/petweets";
 import { getUserByParams } from "../services/users";
@@ -29,7 +29,12 @@ const Profile = () => {
       console.log(error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [username]);
+
+  useLayoutEffect(() => {
+    setPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
 
   useEffect(() => {
     try {
@@ -38,11 +43,15 @@ const Profile = () => {
           page,
           perPage: 10,
         });
-        setPetweets(petweets.concat(responsePetweets.data.petweets));
+        console.log(page);
+        if (page === 1) {
+          setPetweets(responsePetweets.data.petweets);
+        } else {
+          setPetweets(petweets.concat(responsePetweets.data.petweets));
+        }
         setHasMore(page < responsePetweets.data.pagination.pageCount);
       };
       if (user) {
-        console.log(user);
         request();
       }
     } catch (error) {

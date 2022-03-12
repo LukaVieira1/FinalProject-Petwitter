@@ -19,7 +19,7 @@ import {
 import { useChange } from "../context/petweetChange-context";
 export function ModalTweet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { petweetsChange, setPetweetsChange } = useChange();
+  const { petweetsChange, setPetweetsChange } = useChange(false);
   const [textLenght, setTextLenght] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 

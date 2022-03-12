@@ -17,7 +17,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 const Home = () => {
   const [petweets, setPetweets] = useState([]);
   const [textLenght, setTextLenght] = useState(0);
-  const { petweetsChange, setPetweetsChange } = useChange();
+  const { petweetsChange, setPetweetsChange } = useChange(false);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -35,16 +35,21 @@ const Home = () => {
 
     try {
       await postPetweet({ content });
+      setPetweetsChange(!petweetsChange);
+      setIsLoading(false);
+      setPage(1);
+      event.target.reset();
     } catch (error) {}
-    setPetweetsChange(!petweetsChange);
-    setIsLoading(false);
-    event.target.reset();
   }
   useEffect(() => {
     try {
       const request = async () => {
         const response = await getAllPetweets({ page, perPage: 10 });
-        setPetweets(petweets.concat(response.data.petweets));
+        if (page === 1) {
+          setPetweets(response.data.petweets);
+        } else {
+          setPetweets(petweets.concat(response.data.petweets));
+        }
         setHasMore(page < response.data.pagination.pageCount);
       };
       request();
@@ -111,7 +116,6 @@ const Home = () => {
       >
         {petweets?.map((user) => (
           <Tweet
-            key={user.id}
             name={user.user.name}
             tweet={user.content}
             postTime={user.createdAt}
