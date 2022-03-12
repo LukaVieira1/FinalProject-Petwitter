@@ -32,8 +32,8 @@ function Register() {
       .string("Campo senha precisa ser um texto")
       .required("Campo senha é necessário")
       .matches(
-        /^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])(?=.{8,})/,
-        "Deve conter 8 caracteres, uma letra maiúscula, uma minúscula e um número"
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,}$/,
+        "Deve conter 8 caracteres, uma letra maiúscula, uma minúscula, um caracter especial e um número"
       ),
     email: yup
       .string("Campo email precisa ser um texto")
