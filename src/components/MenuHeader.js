@@ -1,14 +1,13 @@
+import { Flex, Image, Button, useDisclosure } from "@chakra-ui/react";
+
 import {
-  Flex,
-  Image,
-  Button,
-  Drawer,
+  DrawerContent,
+  DrawerRoot,
   DrawerBody,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  useDisclosure,
-} from "@chakra-ui/react";
+} from "../components/ui/drawer";
+
 import { useAuth } from "../context/auth-context";
 import { useRef } from "react";
 import CustomLink from "./CustomLink";
@@ -47,13 +46,12 @@ const MenuHeader = () => {
           alt="Logo"
         />
       </Flex>
-      <Drawer
+      <DrawerRoot
         isOpen={isOpen}
         placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
       >
-        <DrawerOverlay />
         <DrawerContent>
           <Flex pt={"40px"} direction={"column"}>
             <DrawerHeader alignSelf={"center"}>
@@ -76,7 +74,7 @@ const MenuHeader = () => {
             </DrawerBody>
           </Flex>
         </DrawerContent>
-      </Drawer>
+      </DrawerRoot>
     </>
   );
 };
