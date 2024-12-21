@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { Provider } from "@/components/ui/provider";
+import { Provider } from "../src/components/ui/provider";
 import { defaultSystem } from "@chakra-ui/react";
 
 ReactDOM.render(
