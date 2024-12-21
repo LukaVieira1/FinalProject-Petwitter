@@ -5,7 +5,6 @@ import {
   DrawerRoot,
   DrawerBody,
   DrawerHeader,
-  DrawerOverlay,
 } from "../components/ui/drawer";
 
 import { useAuth } from "../context/auth-context";
