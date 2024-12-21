@@ -1,13 +1,12 @@
 import { createContext, useState, useContext } from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
+import { Toaster, toaster } from "../components/ui/toaster";
 
 import { setInStorage, login } from "../services/auth";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const toast = useToast();
   const userStored = localStorage.getItem("user");
   const [user, setUser] = useState(userStored ? JSON.parse(userStored) : null);
 
@@ -22,7 +21,7 @@ export function AuthProvider({ children }) {
       setInStorage("user", user);
       setUser(user);
     } catch (error) {
-      toast({
+      toaster({
         title: "Login negado.",
         description: "Senha ou email incorreto",
         status: "error",
@@ -39,6 +38,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ user, signin, signout }}>
+      <Toaster />
       {children}
     </AuthContext.Provider>
   );
