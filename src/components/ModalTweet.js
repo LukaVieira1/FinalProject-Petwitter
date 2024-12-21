@@ -5,17 +5,19 @@ import {
   Button,
   Flex,
   Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Textarea,
   useDisclosure,
   FormControl,
   Text,
 } from "@chakra-ui/react";
+
+import {
+  DialogBody,
+  DialogContent,
+  DialogHeader,
+  DialogCloseTrigger,
+  DialogRoot,
+} from "../components/ui/dialog";
 import { useChange } from "../context/petweetChange-context";
 export function ModalTweet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,17 +62,16 @@ export function ModalTweet() {
       >
         <AddIcon borderBottomRadius={"2px"} />
       </Button>
-      <Modal onClose={handleClose} size={"full"} isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent mt="33px">
+      <DialogRoot onOpenChange={handleClose} size={"full"} open={isOpen}>
+        <DialogContent mt="33px">
           <Flex borderBottom={"1px solid #EEEEEE"} justify={"space-between"}>
-            <ModalCloseButton m={"14px 0 14px 30px"} position={"revert"}>
+            <DialogCloseTrigger m={"14px 0 14px 30px"} position={"revert"}>
               Cancelar{" "}
-            </ModalCloseButton>
-            <ModalHeader p={"8px 8px 8px 0"}></ModalHeader>
+            </DialogCloseTrigger>
+            <DialogHeader p={"8px 8px 8px 0"}></DialogHeader>
           </Flex>
 
-          <ModalBody>
+          <DialogBody>
             <FormControl as={"form"} onSubmit={handleSubmit}>
               <Flex>
                 <Image
@@ -116,9 +117,9 @@ export function ModalTweet() {
                 </Button>
               </Flex>
             </FormControl>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          </DialogBody>
+        </DialogContent>
+      </DialogRoot>
     </>
   );
 }
