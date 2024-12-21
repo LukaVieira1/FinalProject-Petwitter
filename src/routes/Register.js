@@ -5,7 +5,7 @@ import * as yup from "yup";
 import {
   Button,
   Flex,
-  FormControl,
+  Field,
   FormLabel,
   Image,
   Input,
@@ -119,11 +119,7 @@ function Register() {
           >
             Cadastro
           </Text>
-          <FormControl
-            as={"form"}
-            onSubmit={handleSubmit(onSubmit)}
-            mt={["32px"]}
-          >
+          <Field as={"form"} onSubmit={handleSubmit(onSubmit)} mt={["32px"]}>
             <FormLabel htmlFor="email">Nome</FormLabel>
             <Input
               width={["100%"]}
@@ -201,7 +197,7 @@ function Register() {
             >
               Registrar
             </Button>
-          </FormControl>
+          </Field>
           <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
             <Text mt={["24px"]}>Já possui cadastro?</Text>
             <Link

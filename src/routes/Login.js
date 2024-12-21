@@ -2,7 +2,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
-  FormControl,
+  Field,
   FormLabel,
   Image,
   Input,
@@ -107,7 +107,7 @@ function Login() {
             Login
           </Text>
 
-          <FormControl as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
+          <Field as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
             <FormLabel htmlFor="email">Email</FormLabel>
             <Input
               width={["100%"]}
@@ -162,7 +162,7 @@ function Login() {
             >
               Entrar
             </Button>
-          </FormControl>
+          </Field>
           <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
             <Text mt={["24px"]}>Ainda não possui uma conta?</Text>
             <Link

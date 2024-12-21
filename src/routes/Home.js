@@ -5,7 +5,7 @@ import {
   Image,
   Textarea,
   Button,
-  FormControl,
+  Field,
   Text,
   CircularProgress,
 } from "@chakra-ui/react";
@@ -76,7 +76,7 @@ const Home = () => {
           }
           alt={"avatar"}
         />
-        <FormControl as={"form"} onSubmit={handleSubmit}>
+        <Field as={"form"} onSubmit={handleSubmit}>
           <Flex>
             <Textarea
               resize={"none"}
@@ -103,7 +103,7 @@ const Home = () => {
               Petwittar
             </Button>
           </Flex>
-        </FormControl>
+        </Field>
       </Flex>
 
       <InfiniteScroll
