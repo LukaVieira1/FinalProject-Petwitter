@@ -7,7 +7,7 @@ import {
   Image,
   Textarea,
   useDisclosure,
-  FormControl,
+  Field,
   Text,
 } from "@chakra-ui/react";
 
@@ -72,7 +72,7 @@ export function ModalTweet() {
           </Flex>
 
           <DialogBody>
-            <FormControl as={"form"} onSubmit={handleSubmit}>
+            <Field as={"form"} onSubmit={handleSubmit}>
               <Flex>
                 <Image
                   width={"37px"}
@@ -116,7 +116,7 @@ export function ModalTweet() {
                   Petwittar
                 </Button>
               </Flex>
-            </FormControl>
+            </Field>
           </DialogBody>
         </DialogContent>
       </DialogRoot>
