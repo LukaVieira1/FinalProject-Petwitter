@@ -3,7 +3,7 @@ import {
   Button,
   Flex,
   Field,
-  FormLabel,
+  Stack,
   Image,
   Input,
   InputGroup,
@@ -107,51 +107,52 @@ function Login() {
             Login
           </Text>
 
-          <Field as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <Input
-              width={["100%"]}
-              height={["40px"]}
-              name="email"
-              type="email"
-              placeholder="Email"
-            />
-            <Flex justify={["space-between"]}>
-              <FormLabel mt="32px" htmlFor="senha">
-                Senha
-              </FormLabel>
-              <Link
-                textDecoration={["underline"]}
-                mt="32px"
-                color="cyan.400"
-                as={ReachLink}
-                to="/recovery-password"
-              >
-                Esqueci minha senha
-              </Link>
-            </Flex>
-            <InputGroup>
+          <Stack as={"form"} onSubmit={handleSubmit} mt={["32px"]}>
+            <Field label="Email">
               <Input
                 width={["100%"]}
                 height={["40px"]}
-                name="password"
-                type={show ? "text" : "password"}
-                placeholder="Senha"
+                name="email"
+                type="email"
+                placeholder="Email"
               />
-              <InputRightElement width="4.5rem">
-                {/* TODO: FIX THE ICON ( OUTLINE BORDER) */}
-                <Button
-                  variant={"unstyled"}
-                  outline={"none"}
-                  height={"30px"}
-                  color={"black"}
-                  backgroundColor={"white"}
-                  onClick={handleClick}
+            </Field>
+            <Field label="Senha">
+              <Flex justify={["space-between"]}>
+                <Link
+                  textDecoration={["underline"]}
+                  mt="32px"
+                  color="cyan.400"
+                  as={ReachLink}
+                  to="/recovery-password"
                 >
-                  {show ? <ViewIcon /> : <ViewOffIcon />}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
+                  Esqueci minha senha
+                </Link>
+              </Flex>
+              <InputGroup>
+                <Input
+                  width={["100%"]}
+                  height={["40px"]}
+                  name="password"
+                  type={show ? "text" : "password"}
+                  placeholder="Senha"
+                />
+                <InputRightElement width="4.5rem">
+                  {/* TODO: FIX THE ICON ( OUTLINE BORDER) */}
+                  <Button
+                    variant={"unstyled"}
+                    outline={"none"}
+                    height={"30px"}
+                    color={"black"}
+                    backgroundColor={"white"}
+                    onClick={handleClick}
+                  >
+                    {show ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </Field>
+
             <Button
               isLoading={isLoading}
               variant="solid"
@@ -162,7 +163,7 @@ function Login() {
             >
               Entrar
             </Button>
-          </Field>
+          </Stack>
           <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
             <Text mt={["24px"]}>Ainda não possui uma conta?</Text>
             <Link

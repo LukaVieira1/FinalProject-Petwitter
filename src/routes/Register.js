@@ -6,7 +6,7 @@ import {
   Button,
   Flex,
   Field,
-  FormLabel,
+  Stack,
   Image,
   Input,
   InputGroup,
@@ -119,70 +119,68 @@ function Register() {
           >
             Cadastro
           </Text>
-          <Field as={"form"} onSubmit={handleSubmit(onSubmit)} mt={["32px"]}>
-            <FormLabel htmlFor="email">Nome</FormLabel>
-            <Input
-              width={["100%"]}
-              height={["40px"]}
-              type="text"
-              placeholder="Nome"
-              {...register("name")}
-            />
-            <Text fontSize={["10px"]} mt={["4px"]}>
-              {errors.name && <span>{errors.name.message}</span>}
-            </Text>
-            <FormLabel mt="16px" htmlFor="email">
-              Email
-            </FormLabel>
-            <Input
-              width={["100%"]}
-              height={["40px"]}
-              type="email"
-              placeholder="Email"
-              {...register("email")}
-            />
-            <Text fontSize={["10px"]} mt={["4px"]}>
-              {errors.email && <span>{errors.email.message}</span>}
-            </Text>
-            <FormLabel mt="16px" htmlFor="email">
-              Nome de usuário
-            </FormLabel>
-            <Input
-              width={["100%"]}
-              height={["40px"]}
-              type="text"
-              placeholder="EX.: billbuldog"
-              {...register("username")}
-            />
-            <Text fontSize={["10px"]} mt={["4px"]}>
-              {errors.username && <span>{errors.username.message}</span>}
-            </Text>
-            <FormLabel mt="16px" htmlFor="senha">
-              Senha
-            </FormLabel>
-            <InputGroup>
+          <Stack as={"form"} onSubmit={handleSubmit(onSubmit)} mt={["32px"]}>
+            <Field label="Nome">
               <Input
                 width={["100%"]}
                 height={["40px"]}
-                type={show ? "text" : "password"}
-                placeholder="Senha"
-                {...register("password")}
+                type="text"
+                placeholder="Nome"
+                {...register("name")}
               />
+            </Field>
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              {errors.name && <span>{errors.name.message}</span>}
+            </Text>
+            <Field label="Email">
+              <Input
+                width={["100%"]}
+                height={["40px"]}
+                type="email"
+                placeholder="Email"
+                {...register("email")}
+              />
+            </Field>
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              {errors.email && <span>{errors.email.message}</span>}
+            </Text>
+            <Field label="Nome de usuário">
+              <Input
+                width={["100%"]}
+                height={["40px"]}
+                type="text"
+                placeholder="EX.: billbuldog"
+                {...register("username")}
+              />
+            </Field>
+            <Text fontSize={["10px"]} mt={["4px"]}>
+              {errors.username && <span>{errors.username.message}</span>}
+            </Text>
+            <Field label="Senha">
+              <InputGroup>
+                <Input
+                  width={["100%"]}
+                  height={["40px"]}
+                  type={show ? "text" : "password"}
+                  placeholder="Senha"
+                  {...register("password")}
+                />
 
-              <InputRightElement width="4.5rem">
-                {/* TODO: FIX THE ICON (OUTLINE BORDER) */}
-                <Button
-                  variant={"unstyled"}
-                  outline={"none"}
-                  height={"30px"}
-                  color={"black"}
-                  backgroundColor={"white"}
-                  onClick={handleClick}
-                >
-                  {show ? <ViewIcon /> : <ViewOffIcon />}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
+                <InputRightElement width="4.5rem">
+                  {/* TODO: FIX THE ICON (OUTLINE BORDER) */}
+                  <Button
+                    variant={"unstyled"}
+                    outline={"none"}
+                    height={"30px"}
+                    color={"black"}
+                    backgroundColor={"white"}
+                    onClick={handleClick}
+                  >
+                    {show ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </Field>
             <Text fontSize={["10px"]} mt={["4px"]}>
               {errors.password && <span>{errors.password.message}</span>}
             </Text>
@@ -197,7 +195,7 @@ function Register() {
             >
               Registrar
             </Button>
-          </Field>
+          </Stack>
           <Flex alignSelf={"flex-start"} direction={["column", "row"]}>
             <Text mt={["24px"]}>Já possui cadastro?</Text>
             <Link
