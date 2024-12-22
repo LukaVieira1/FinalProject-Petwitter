@@ -9,7 +9,6 @@ import {
   Stack,
   Image,
   Input,
-  InputRightElement,
   Link,
   Text,
   useToast,
@@ -166,19 +165,17 @@ function Register() {
                   {...register("password")}
                 />
 
-                <InputRightElement width="4.5rem">
-                  {/* TODO: FIX THE ICON (OUTLINE BORDER) */}
-                  <Button
-                    variant={"unstyled"}
-                    outline={"none"}
-                    height={"30px"}
-                    color={"black"}
-                    backgroundColor={"white"}
-                    onClick={handleClick}
-                  >
-                    {show ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
+                {/* TODO: FIX THE ICON (OUTLINE BORDER) */}
+                <Button
+                  variant={"unstyled"}
+                  outline={"none"}
+                  height={"30px"}
+                  color={"black"}
+                  backgroundColor={"white"}
+                  onClick={handleClick}
+                >
+                  {show ? <ViewIcon /> : <ViewOffIcon />}
+                </Button>
               </InputGroup>
             </Field>
             <Text fontSize={["10px"]} mt={["4px"]}>
