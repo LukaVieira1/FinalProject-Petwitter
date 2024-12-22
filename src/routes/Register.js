@@ -11,17 +11,16 @@ import {
   Input,
   Link,
   Text,
-  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import { signup } from "../services/auth";
 import { InputGroup } from "../components/ui/input-group";
-
+import { toaster } from "../components/ui/toaster";
 function Register() {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const toast = useToast();
+  const toast = toaster();
 
   let schema = yup.object().shape({
     name: yup
