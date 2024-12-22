@@ -6,7 +6,6 @@ import {
   Stack,
   Image,
   Input,
-  InputGroup,
   InputRightElement,
   Link,
   Text,
@@ -14,6 +13,7 @@ import {
 import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
+import { InputGroup } from "../components/ui/input-group";
 
 function Login() {
   const [show, setShow] = useState(false);

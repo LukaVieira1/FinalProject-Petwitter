@@ -9,7 +9,6 @@ import {
   Stack,
   Image,
   Input,
-  InputGroup,
   InputRightElement,
   Link,
   Text,
@@ -18,6 +17,7 @@ import {
 import { useState } from "react";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import { signup } from "../services/auth";
+import { InputGroup } from "../components/ui/input-group";
 
 function Register() {
   const [show, setShow] = useState(false);
