@@ -1,18 +1,15 @@
 import Tweet from "../components/Tweet";
 import { ModalTweet } from "../components/ModalTweet";
-import {
-  Flex,
-  Image,
-  Textarea,
-  Button,
-  Field,
-  Text,
-  CircularProgress,
-} from "@chakra-ui/react";
+import { Flex, Image, Textarea, Button, Field, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getAllPetweets, postPetweet } from "../services/petweets";
 import { useChange } from "../context/petweetChange-context";
 import InfiniteScroll from "react-infinite-scroll-component";
+
+import {
+  ProgressCircleRing,
+  ProgressCircleRoot,
+} from "../components/ui/progress-circle";
 
 const Home = () => {
   const [petweets, setPetweets] = useState([]);
@@ -111,7 +108,9 @@ const Home = () => {
         next={() => setPage(page + 1)}
         hasMore={hasMore}
         loader={
-          <CircularProgress left={"50%"} isIndeterminate color="cyan.400" />
+          <ProgressCircleRoot value={null} size="sm">
+            <ProgressCircleRing cap="round" />
+          </ProgressCircleRoot>
         }
       >
         {petweets?.map((user) => (

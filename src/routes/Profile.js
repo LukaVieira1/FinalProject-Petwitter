@@ -1,4 +1,4 @@
-import { Flex, Image, Text, CircularProgress } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState, useLayoutEffect } from "react";
 import Tweet from "../components/Tweet";
 import { getPetweetsByUserId } from "../services/petweets";
@@ -9,6 +9,10 @@ import TimeAgo from "react-timeago";
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
 import ptBrStrings from "react-timeago/lib/language-strings/pt-br";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {
+  ProgressCircleRing,
+  ProgressCircleRoot,
+} from "../components/ui/progress-circle";
 
 const Profile = () => {
   const [petweets, setPetweets] = useState([]);
@@ -125,7 +129,9 @@ const Profile = () => {
           next={() => setPage(page + 1)}
           hasMore={hasMore}
           loader={
-            <CircularProgress left={"50%"} isIndeterminate color="cyan.400" />
+            <ProgressCircleRoot value={null} size="sm">
+              <ProgressCircleRing cap="round" />
+            </ProgressCircleRoot>
           }
         >
           {petweets?.map((petweet) => (
