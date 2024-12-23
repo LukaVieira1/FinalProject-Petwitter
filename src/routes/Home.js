@@ -1,6 +1,6 @@
 import Tweet from "../components/Tweet";
 import { ModalTweet } from "../components/ModalTweet";
-import { Flex, Image, Textarea, Button, Field, Text } from "@chakra-ui/react";
+import { Flex, Image, Textarea, Button, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getAllPetweets, postPetweet } from "../services/petweets";
 import { useChange } from "../context/petweetChange-context";
@@ -73,7 +73,7 @@ const Home = () => {
           }
           alt={"avatar"}
         />
-        <Field as={"form"} onSubmit={handleSubmit}>
+        <Stack as={"form"} onSubmit={handleSubmit}>
           <Flex>
             <Textarea
               resize={"none"}
@@ -100,7 +100,7 @@ const Home = () => {
               Petwittar
             </Button>
           </Flex>
-        </Field>
+        </Stack>
       </Flex>
 
       <InfiniteScroll
