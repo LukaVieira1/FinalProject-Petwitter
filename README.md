@@ -1,31 +1,43 @@
 # Petwitter
-A aplicação consite em twitter para pets, onde é possivel logar, cadastrar, twittar e acessar pefil do usuario.
+Petwitter is an application that works as a Twitter for pets, where users can log in, register, tweet, and access user profiles.
 
 https://petwitter.vercel.app/
 
-## Pré-requisitos
-Tenha instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e [Yarn](https://yarnpkg.com/).
+## Prerequisites
+Make sure you have the following tools installed on your machine:
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/)
 
-## Rodando a aplicação
-Para iniciar o projeto, siga o passo a passo abaixo.
-1. Baixe o [projeto do Back-End](https://github.com/LukaVieira1/FinalProject-Petwitter-BackEnd) em sua máquina e crie um repositório no Github baseado nele.
-2. Execute os seguintes passos
+## Running the Application
+To start the project, follow the steps below:
+
+1. Download the [Back-End project](https://github.com/LukaVieira1/FinalProject-Petwitter-BackEnd) to your machine and create a repository on GitHub based on it.
+2. Execute the following commands:
+   ```bash
+   # Install dependencies
+   $ yarn
+   # Start the server
+   $ yarn dev
 ```bash
 # Instalar as dependências
 $ yarn
 # Executar o server
 $ yarn dev
 ```
-3. Agora na pasta do propio projeto, faça o clone no seu computador também e execute os seguintes passos
+3. Clone the Front-End project to your machine and execute the following commands:
 ```bash
-# Instalar as dependências
+# Install dependencies
 $ yarn
 ```
 
-4. Crie na raiz da pasta "FinalProject-Petwitter-FrontEnd" um .env-local e adicione uma variável de ambiente "REACT_APP_API_URL" que irá conter o link para a api. Nesse projeto utiliza-se "REACT_APP_API_URL=http://localhost:3000"
-5. Execute o projeto em uma porta diferente da 3000, pois ela já vai estar em uso (caso você esteja executando o vscode, na hora de executar, ele vai perguntar se você quer rodar o projeto em outra porta)
+4. Create a .env-local file at the root of the "FinalProject-Petwitter-FrontEnd" folder and add the following environment variable:
 ```bash
-# Executando o projeto
+REACT_APP_API_URL=http://localhost:3000
+```
+
+6. Run the project on a port other than 3000, as it will already be in use (if you're using VSCode, it will prompt you to run the project on a different port):
+```bash
+# Start the project
 $ yarn start
 ```
